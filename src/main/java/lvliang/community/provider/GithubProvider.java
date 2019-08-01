@@ -14,6 +14,13 @@ import java.io.IOException;
  */
 @Component
 public class GithubProvider {
+     /**
+      * @description 获取github返回的AccessToken,这个对象的参数设置在callback方法中设置的
+      * @params accessTokenDTO 实例化的accessTokenDTO对象
+      * @return
+      * @author  lvliang
+      * @date  2019/8/1 8:13
+      */
     public String getAccessToken(AccessTokenDTO accessTokenDTO){
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
 
@@ -33,7 +40,6 @@ public class GithubProvider {
             String [] split = string.split("&");
             String tokenStr = split[0];
             String token = tokenStr.split("=")[1];
-            System.out.println(token);
             return token;
         } catch (IOException e) {
             e.printStackTrace();
@@ -41,6 +47,13 @@ public class GithubProvider {
         return null;
     }
 
+    /**
+     * @description 得到用户对象
+     * @params accessToken传入Token对象获取用户信息
+     * @return githubUser
+     * @author  lvliang
+     * @date  2019/8/1 8:16
+     */
     public GithubUser getUser(String accessToken){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
